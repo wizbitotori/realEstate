@@ -1,35 +1,24 @@
-/* 
- * Copyright 2015.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 
 package Handler;
 
+import Entity.Utilisateur;
 import java.util.Vector;
+import javax.microedition.lcdui.List;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import Entity.*;
-
 /**
  *
- * @author FATHALLAH Wael
+ * @author Hamza
  */
-public class UtilisateurHandler extends DefaultHandler {
-  
-    private Vector utilisateurs;
+public class GerantHandler extends DefaultHandler{
+       private Vector utilisateurs;
     String idTag = "close";
     String mailTag = "close";
     String passTag = "close";
@@ -41,7 +30,7 @@ public class UtilisateurHandler extends DefaultHandler {
     String rolTag = "close";
     String URLpTag = "close";
     
-    public UtilisateurHandler() {
+    public GerantHandler() {
         utilisateurs = new Vector();
     }
 
@@ -50,7 +39,6 @@ public class UtilisateurHandler extends DefaultHandler {
         utilisateurs.copyInto(utilisateurss);
         return utilisateurss;
     }
-  
     // VARIABLES TO MAINTAIN THE PARSER'S STATE DURING PROCESSING
     private Utilisateur currentUtilisateur;
 
@@ -61,10 +49,10 @@ public class UtilisateurHandler extends DefaultHandler {
             currentUtilisateur = new Utilisateur();
             
             currentUtilisateur.setId(attributes.getValue("u0"));
-            currentUtilisateur.setMail(attributes.getValue("u1"));
-            currentUtilisateur.setPassword(attributes.getValue("u2"));
-            currentUtilisateur.setNom(attributes.getValue("u3"));
-            currentUtilisateur.setPrenom(attributes.getValue("u4"));
+            currentUtilisateur.setMail(attributes.getValue("u3"));
+            currentUtilisateur.setPassword(attributes.getValue("u4"));
+            currentUtilisateur.setNom(attributes.getValue("u1"));
+            currentUtilisateur.setPrenom(attributes.getValue("u2"));
             currentUtilisateur.setNumMobile(attributes.getValue("u5"));
             currentUtilisateur.setNumFix(attributes.getValue("u6"));
             currentUtilisateur.setStatMAtri(attributes.getValue("u7"));
@@ -74,13 +62,13 @@ public class UtilisateurHandler extends DefaultHandler {
             
         } else if (qName.equals("u0")) {
             idTag = "open";
-        } else if (qName.equals("u1")) {
-            mailTag = "open";
-        } else if (qName.equals("u2")) {
-            passTag = "open";
         } else if (qName.equals("u3")) {
-            nomTag = "open";
+            mailTag = "open";
         } else if (qName.equals("u4")) {
+            passTag = "open";
+        } else if (qName.equals("u1")) {
+            nomTag = "open";
+        } else if (qName.equals("u2")) {
             prenTag = "open";
         } else if (qName.equals("u5")) {
             numMTag = "open";
@@ -104,13 +92,13 @@ public class UtilisateurHandler extends DefaultHandler {
             currentUtilisateur = null;
         } else if (qName.equals("u0")) {
             idTag = "close";
-        } else if (qName.equals("u1")) {
-            mailTag = "close";
-        } else if (qName.equals("u2")) {
-            passTag = "close";
         } else if (qName.equals("u3")) {
-            nomTag = "close";
+            mailTag = "close";
         } else if (qName.equals("u4")) {
+            passTag = "close";
+        } else if (qName.equals("u1")) {
+            nomTag = "close";
+        } else if (qName.equals("u2")) {
             prenTag = "close";
         } else if (qName.equals("u5")) {
             numMTag = "close";
@@ -162,5 +150,6 @@ public class UtilisateurHandler extends DefaultHandler {
             }
         }
     }
+    
     
 }
